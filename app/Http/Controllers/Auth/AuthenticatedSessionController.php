@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        toastr()->success('You are logged in successfully');
         if($request->user()->role === 'admin'){
             return redirect()->intended(route('admin.dashboard'));
         }elseif ($request->user()->role === 'agent'){
@@ -36,6 +36,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
+
+
+
     }
 
     /**
@@ -43,12 +46,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $role = $request->user()->role;     // Store The Role
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        if($role === 'admin'){
+            return redirect('/admin/login');
+        }
+        return redirect('/login');
     }
 }

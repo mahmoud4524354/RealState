@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('admin.home.master')
 
 
 @section('content')
@@ -22,7 +22,6 @@
                                      alt="profile">
                                 <span class="h4 ms-3 ">{{ $profileData->username }}</span>
                             </div>
-
 
 
                         </div>
@@ -96,7 +95,6 @@
                                 </div>
 
 
-
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Address </label>
                                     <input type="text" name="address" class="form-control" id="exampleInputUsername1"
@@ -117,16 +115,12 @@
                                 </div>
 
 
-
-
-                                <button type="submit" class="btn btn-primary me-2">Save Changes </button>
+                                <button type="submit" class="btn btn-primary me-2">Save Changes</button>
 
                             </form>
 
                         </div>
                     </div>
-
-
 
 
                 </div>
@@ -136,10 +130,10 @@
 
     </div>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#image').change(function(e) {
+        $(document).ready(function () {
+            $('#image').change(function (e) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
