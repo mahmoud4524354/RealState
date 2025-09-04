@@ -46,21 +46,22 @@
 
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" name="email" id="email" required="">
+                                            <input type="email" name="email" id="email" >
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" name="password" id="password" required="">
+                                            <input type="password" name="password" id="password" >
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
                                         </div>
 
                                         <div class="form-group message-btn">
                                             <button type="submit" class="theme-btn btn-one">Sign in</button>
                                         </div>
                                     </form>
-                                    <div class="othre-text">
-                                        <p>Have not any account? <a href="signup.html">Register Now</a></p>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="tab" id="tab-2">
@@ -74,30 +75,31 @@
                                         <div class="form-group">
 
                                             <label>User name</label>
-                                            <input type="text" name="name" id="name" required="">
+                                            <input type="text" name="name" id="name" >
+                                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                         </div>
+
                                         <div class="form-group">
                                             <label>Email address</label>
-                                            <input type="email" name="email" id="email" required="">
+                                            <input type="email" name="email" id="email" >
+                                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" name="password" id="password" required="">
+                                            <input type="password" name="password" id="password">
+                                            <x-input-error :messages="$errors->get('password')" class="mt-2 tex" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Confirm Password</label>
                                             <input type="password" name="password_confirmation"
-                                                   id="password_confirmation" required="">
+                                                   id="password_confirmation" >
                                         </div>
 
                                         <div class="form-group message-btn">
                                             <button type="submit" class="theme-btn btn-one">Register</button>
                                         </div>
                                     </form>
-                                    <div class="othre-text">
-                                        <p>Have not any account? <a href="signup.html">Register Now</a></p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +113,7 @@
 
     <!-- subscribe-section -->
     <section class="subscribe-section bg-color-3">
-        <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-2.png);"></div>
+        <div class="pattern-layer" style="background-image: url({{asset('front/assets/images/shape/shape-2.png')}});"></div>
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 text-column">

@@ -28,7 +28,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        toastr()->success('You are logged in successfully');
+
+        toastr()->info('You are logged in successfully');
+
         if($request->user()->role === 'admin'){
             return redirect()->intended(route('admin.dashboard'));
         }elseif ($request->user()->role === 'agent'){
