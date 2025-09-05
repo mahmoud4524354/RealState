@@ -3,7 +3,7 @@ $(function(){
         e.preventDefault();
         var link = $(this).attr("href");
 
-  
+
                   Swal.fire({
                     title: 'Are you sure?',
                     text: "Delete This Data?",
@@ -21,7 +21,7 @@ $(function(){
                         'success'
                       )
                     }
-                  }) 
+                  })
 
 
     });
