@@ -64,6 +64,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/update/type/{id}', 'updateType')->name('update.type');
         Route::get('/delete/type/{id}', 'deleteType')->name('delete.type');
 
+
+        Route::get('/all/amenitie', 'allAmenitie')->name('all.amenitie');
+        Route::get('/add/amenitie', 'addAmenitie')->name('add.amenitie');
+        Route::post('/store/amenitie', 'storeAmenitie')->name('store.amenitie');
+        Route::get('/edit/amenitie/{id}', 'editAmenitie')->name('edit.amenitie');
+        Route::post('/update/amenitie/{id}', 'updateAmenitie')->name('update.amenitie');
+        Route::get('/delete/amenitie/{id}', 'deleteAmenitie')->name('delete.amenitie');
+
     });
 });
 
