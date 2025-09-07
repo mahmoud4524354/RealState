@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -73,6 +74,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/delete/amenitie/{id}', 'deleteAmenitie')->name('delete.amenitie');
 
     });
+
+    Route::controller(PropertyController::class)->group(function () {
+        Route::get('/all/property', 'allProperty')->name('all.property');
+        Route::get('/add/property', 'addProperty')->name('add.property');
+    });
+
 });
 
 
