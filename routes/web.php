@@ -78,6 +78,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(PropertyController::class)->group(function () {
         Route::get('/all/property', 'allProperty')->name('all.property');
         Route::get('/add/property', 'addProperty')->name('add.property');
+        Route::post('/store/property', 'storeProperty')->name('store.property');
+        Route::get('/edit/property/{id}', 'editProperty')->name('edit.property');
+
+
+        Route::post('/update/property', 'UpdateProperty')->name('update.property');
+        Route::post('/update/property/thambnail', 'UpdatePropertyThambnail')->name('update.property.thambnail');
+        Route::post('/update/property/multiimage', 'UpdatePropertyMultiimage')->name('update.property.multiimage');
+
+
+        Route::get('/property/multiimg/delete/{id}', 'PropertyMultiImageDelete')->name('property.multiimg.delete');
+
+        Route::post('/store/new/multiimage', 'StoreNewMultiimage')->name('store.new.multiimage');
+
+        Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
+
+        Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+
+        Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
+
+        Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
+
+        Route::post('/active/property', 'ActiveProperty')->name('active.property');
+
     });
 
 });
