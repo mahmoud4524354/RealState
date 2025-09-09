@@ -37,7 +37,7 @@
                                         <td><img src="{{ asset($item->property_thambnail) }}"
                                                  style="width:70px; height:40px;"></td>
                                         <td>{{ $item->property_name }}</td>
-                                        <td>{{ $item['type']['type_name'] }}</td>
+                                        <td>{{ $item->type?->type_name }}</td>
                                         <td>{{ $item->property_status }}</td>
                                         <td>{{ $item->city }}</td>
                                         <td>{{ $item->property_code }}</td>

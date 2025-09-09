@@ -58,6 +58,8 @@ class AuthenticatedSessionController extends Controller
 
         if($role === 'admin'){
             return redirect('/admin/login');
+        }elseif ($role === 'agent'){
+            return redirect('/agent/login');
         }
         return redirect('/login');
     }

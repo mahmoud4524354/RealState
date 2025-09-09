@@ -33,13 +33,9 @@ class AdminController extends Controller
     {
         $user = Auth::user();
 
-        $user->photo = $this->uploadImage(
-            $request,
-            'photo',
-            $user->photo ?? null,
-            'upload/'
-        );
-
+        if ($request->hasFile('photo')) {
+            $user->photo = $this->uploadImage($request, 'photo');
+        }
 
         $user->update([
             'username' => $request->username,

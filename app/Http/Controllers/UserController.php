@@ -30,7 +30,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $user->photo = $this->uploadImage($request, 'photo');
+        if ($request->hasFile('photo')) {
+            $user->photo = $this->uploadImage($request, 'photo');
+        }
 
         $user->update([
             'username' => $request->username,
@@ -45,7 +47,8 @@ class UserController extends Controller
         return back();
     }
 
-    public function UserChangePassword(){
+    public function UserChangePassword()
+    {
 
         return view('frontend.dashboard.change_password');
 

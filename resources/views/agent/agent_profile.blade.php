@@ -1,6 +1,5 @@
-@extends('admin.home.master')
-@section('content')
-
+@extends('agent.agent_dashboard')
+@section('agent')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <div class="page-content">
@@ -16,7 +15,7 @@
 
                             <div>
                                 <img class="wd-100 rounded-circle"
-                                     src="{{ $profileData->photo ? asset($profileData->photo) : asset('uploads/no_image.jpg') }}"
+                                     src="{{ (!empty($profileData->photo)) ? url($profileData->photo) : url('uploads/no_image.jpg') }}"
                                      alt="profile">
                                 <span class="h4 ms-3 ">{{ $profileData->username }}</span>
                             </div>
@@ -61,9 +60,9 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h6 class="card-title">Update Admin Profile </h6>
+                            <h6 class="card-title">Update Agent Profile </h6>
 
-                            <form method="POST" action="{{route('admin.profile.update')}}" class="forms-sample"
+                            <form method="POST" action="{{ route('agent.profile.store') }}" class="forms-sample"
                                   enctype="multipart/form-data">
                                 @csrf
 
@@ -108,7 +107,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"> </label>
                                     <img id="showImage" class="wd-80 rounded-circle"
-                                         src="{{ !empty($profileData->photo) ?  asset($profileData->photo) : asset('uploads/no_image.jpg') }}"
+                                         src="{{ (!empty($profileData->photo)) ? url($profileData->photo) : url('uploads/no_image.jpg') }}"
                                          alt="profile">
                                 </div>
 
@@ -123,10 +122,16 @@
 
                 </div>
             </div>
+            <!-- middle wrapper end -->
+            <!-- right wrapper start -->
 
+            <!-- right wrapper end -->
         </div>
 
     </div>
+
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#image').change(function (e) {
@@ -137,5 +142,8 @@
                 reader.readAsDataURL(e.target.files['0']);
             });
         });
+
+
     </script>
+
 @endsection

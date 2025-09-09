@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('agent/login', [AgentController::class, 'login'])->name('agent.login');
 });
 
 
@@ -109,6 +110,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Agent Group Middleware
 Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::get('agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
+
+    Route::get('/agent/profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
+
+    Route::post('/agent/profile/store', [AgentController::class, 'agentProfileUpdate'])->name('agent.profile.store');
+
+    Route::get('/agent/change/password', [AgentController::class, 'agentChangePassword'])->name('agent.change.password');
+
+    Route::post('/agent/update/password', [AgentController::class, 'agentUpdatePassword'])->name('agent.update.password');
+
 });
 
 // Property Type All Route
