@@ -15,7 +15,7 @@
 
                             <div>
                                 <img class="wd-100 rounded-circle"
-                                     src="{{ (!empty($profileData->photo)) ? url($profileData->photo) : url('upload/no_image.jpg') }}"
+                                     src="{{ (!empty($profileData->photo)) ? url($profileData->photo) : url('uploads/no_image.jpg') }}"
                                      alt="profile">
                                 <span class="h4 ms-3 ">{{ $profileData->username }}</span>
                             </div>

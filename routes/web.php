@@ -101,8 +101,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
 
         Route::post('/active/property', 'ActiveProperty')->name('active.property');
-
     });
+
+});
+
+
+// Agent All Route from admin
+Route::controller(AdminController::class)->group(function(){
+
+    Route::get('/all/agent', 'allAgent')->name('all.agent');
+    Route::get('/add/agent', 'addAgent')->name('add.agent');
+    Route::post('/store/agent', 'storeAgent')->name('store.agent');
+    Route::get('/edit/agent/{id}', 'editAgent')->name('edit.agent');
+    Route::post('/update/agent/{id}', 'updateAgent')->name('update.agent');
+    Route::get('/delete/agent/{id}', 'deleteAgent')->name('delete.agent');
+
+    Route::get('/changeStatus', 'changeStatus');
 
 });
 
@@ -120,8 +134,6 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
     Route::post('/agent/update/password', [AgentController::class, 'agentUpdatePassword'])->name('agent.update.password');
 
 });
-
-// Property Type All Route
 
 
 require __DIR__ . '/auth.php';
