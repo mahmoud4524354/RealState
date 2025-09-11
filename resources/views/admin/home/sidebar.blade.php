@@ -102,7 +102,7 @@
                             <a href="{{ route('all.agent') }}" class="nav-link">All Agent </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/ui-components/alerts.html" class="nav-link">Add Agent</a>
+                            <a href="{{route('add.agent')}}" class="nav-link">Add Agent</a>
                         </li>
 
                     </ul>

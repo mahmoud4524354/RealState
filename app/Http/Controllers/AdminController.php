@@ -144,35 +144,18 @@ class AdminController extends Controller
         $agent = User::where('role', 'agent')->findOrFail($id);
 
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $agent->id,
-            'phone'    => 'nullable|string|max:20',
-            'address'  => 'nullable|string|max:255',
-            'password' => 'nullable|string|min:6',
-            'photo'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $agent->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
         ]);
-
-        if ($request->filled('password')) {
-            $password = hash::make($request->password);
-        }else{
-            $password = $agent->password;
-        }
-
-
-        if($request->hasFile('photo')){
-            $photo =$this->uploadImage($request, 'photo');
-        }else{
-            $photo = $agent->photo;
-        }
 
 
         $agent->update([
-            'name'    => $request->name,
-            'email'   => $request->email,
-            'phone'   => $request->phone,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
             'address' => $request->address,
-            'password' => $password,
-            'photo'   => $photo,
         ]);
 
 
@@ -192,9 +175,9 @@ class AdminController extends Controller
 
     public function changeStatus(Request $request)
     {
-
         $user = User::find($request->user_id);
         $user->status = $request->status;
+
         $user->save();
 
         return response()->json(['success' => 'Status Change Successfully']);

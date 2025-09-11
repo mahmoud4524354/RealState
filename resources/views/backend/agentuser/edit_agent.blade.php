@@ -45,20 +45,6 @@
                                            value="{{ $allagent->address }}">
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Agent Password </label>
-                                    <input type="password" name="password" class="form-control"
-                                           value="{{ $allagent->address }}">
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Agent Image </label>
-                                    <input type="file" name="photo" class="form-control"
-                                           onChange="mainThamUrl(this)">
-
-                                    <img src="{{ !empty($allagent->photo) ? url($allagent->photo) : url('uploads/no_image.jpg') }}"
-                                         id="agentPhoto" style="width:80px; height:80px;">                                </div>
-
                                 <button type="submit" class="btn btn-primary me-2">Save Changes</button>
 
                             </form>
@@ -73,18 +59,6 @@
 
     </div>
 
-
-    <script type="text/javascript">
-        function mainThamUrl(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#agentPhoto').attr('src', e.target.result).width(80).height(80);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -132,36 +106,6 @@
                 unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 },
-            });
-        });
-
-    </script>
-
-    <script>
-
-        $(document).ready(function () {
-            $('#agentPhoto').on('change', function () { //on file input change
-                if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
-                {
-                    var data = $(this)[0].files; //this file data
-
-                    $.each(data, function (index, file) { //loop though each file
-                        if (/(\.|\/)(gif|jpe?g|png|webp)$/i.test(file.type)) { //check supported file type
-                            var fRead = new FileReader(); //new filereader
-                            fRead.onload = (function (file) { //trigger function on successful read
-                                return function (e) {
-                                    var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(100)
-                                        .height(80); //create image element
-                                    $('#preview_img').append(img); //append image to output element
-                                };
-                            })(file);
-                            fRead.readAsDataURL(file); //URL representing the file's data.
-                        }
-                    });
-
-                } else {
-                    alert("Your browser doesn't support File API!"); //if File API is absent
-                }
             });
         });
 
