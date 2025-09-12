@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
 use App\Models\Property;
@@ -10,6 +11,7 @@ use App\Models\MultiImage;
 use App\Models\Facility;
 use App\Models\Amenities;
 use App\Models\PropertyType;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
@@ -35,12 +37,25 @@ class AgentPropertyController extends Controller
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
 
-        return view('agent.property.add_property', compact('propertytype', 'amenities'));
+        $id = Auth::user()->id;
+        $property = User::where('role','agent')->where('id',$id)->first();
+        $pcount = $property->credit;
 
-    }// End Method
+        if ($pcount <= 0) {
+            return redirect()->route('buy.package');
+        }else{
+
+            return view('agent.property.add_property',compact('propertytype','amenities'));
+        }
+
+    }
 
     public function AgentStoreProperty(Request $request)
     {
+
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+        $nid = $user->credit;
 
         $amen = $request->amenities_id;
         $amenites = implode(",", $amen);
@@ -121,6 +136,9 @@ class AgentPropertyController extends Controller
         }
 
         /// End Facilities  ////
+
+        $user->decrement('credit', 1);
+
         toastr()->success('Property added successfully!');
         return redirect()->route('agent.all.property');
 

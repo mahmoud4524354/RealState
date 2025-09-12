@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Agent\AgentBuyPackageController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -160,6 +161,17 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
         Route::get('/agent/details/property/{id}', 'AgentDetailsProperty')->name('agent.details.property');
 
         Route::get('/agent/delete/property/{id}', 'AgentDeleteProperty')->name('agent.delete.property');
+
+    });
+
+    Route::controller(AgentBuyPackageController::class)->group(function(){
+
+        Route::get('/buy/package', 'BuyPackage')->name('buy.package');
+        Route::get('/buy/business/plan', 'BuyBusinessPlan')->name('buy.business.plan');
+        Route::post('/store/business/plan', 'StoreBusinessPlan')->name('store.business.plan');
+
+        Route::get('/buy/professional/plan', 'BuyProfessionalPlan')->name('buy.professional.plan');
+        Route::post('/store/professional/plan', 'StoreProfessionalPlan')->name('store.professional.plan');
 
 
 
