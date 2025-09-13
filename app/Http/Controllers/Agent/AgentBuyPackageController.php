@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 use App\Models\PackagePlan;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +86,27 @@ class AgentBuyPackageController extends Controller
         toastr()->success('Professional plan added successfully!');
 
         return redirect()->route('agent.all.property');
+    }
+
+
+    public function PackageHistory()
+    {
+        $id = Auth::user()->id;
+        $packagehistory = PackagePlan::where('user_id', $id)->get();
+        return view('agent.package.package_history', compact('packagehistory'));
+
+    }
+
+    public function AgentPackageInvoice($id)
+    {
+
+        $packagehistory = PackagePlan::where('id', $id)->first();
+
+        $pdf = Pdf::loadView('agent.package.package_history_invoice', compact('packagehistory'))->setPaper('a4')->setOption([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
     }
 
 }
