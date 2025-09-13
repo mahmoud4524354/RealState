@@ -9,29 +9,36 @@
         * {
             font-family: Verdana, Arial, sans-serif;
         }
-        table{
+
+        table {
             font-size: x-small;
         }
-        tfoot tr td{
+
+        tfoot tr td {
             font-weight: bold;
             font-size: x-small;
         }
+
         .gray {
             background-color: lightgray
         }
-        .font{
+
+        .font {
             font-size: 15px;
         }
+
         .authority {
             /*text-align: center;*/
             float: right
         }
+
         .authority h5 {
             margin-top: -10px;
             color: green;
             /*text-align: center;*/
             margin-left: 35px;
         }
+
         .thanks p {
             color: green;;
             font-size: 16px;
@@ -51,7 +58,7 @@
             <h2 style="color: green; font-size: 26px;"><strong>EasyShop</strong></h2>
         </td>
         <td align="right">
-            <pre class="font" >
+            <pre class="font">
                EasyShop Head Office
                Email:support@easylearningbd.com <br>
                Mob: 1245454545 <br>
@@ -91,13 +98,11 @@
 <h3>Property Package </h3>
 
 
-
-
 <table width="100%">
     <thead style="background-color: green; color:#FFFFFF;">
     <tr class="font">
 
-        <th>Package Name </th>
+        <th>Package Name</th>
         <th class="text-end">Property Quantity</th>
         <th class="text-end">Unit cost</th>
         <th class="text-end">Total</th>

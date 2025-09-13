@@ -1,8 +1,8 @@
-@extends('agent.agent_dashboard')
-@section('agent')
+@extends('admin.home.master')
+@section('content')
 
     <div class="page-content">
-        
+
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -15,6 +15,7 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Image</th>
+                                    <th>Name</th>
                                     <th>Package</th>
                                     <th>Invoice</th>
                                     <th>Amount</th>
@@ -27,14 +28,15 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td><img
-                                                src="{{ (!empty($item->user->photo)) ? url($item->user->photo) : url('uploads/no_image.jpg') }}"
+                                                src="{{ (!empty($item->user->photo)) ? url('upload/agent_images/'.$item->user->photo) : url('upload/no_image.jpg') }}"
                                                 style="width:70px; height:40px;"></td>
+                                        <td>{{ $item['user']['name'] }}</td>
                                         <td>{{ $item->package_name }}</td>
                                         <td>{{ $item->invoice }}</td>
                                         <td>{{ $item->package_amount }}</td>
                                         <td>{{ $item->created_at->format('l d M Y') }}</td>
                                         <td>
-                                            <a href="{{ route('agent.package.invoice',$item->id) }}"
+                                            <a href="{{ route('package.invoice',$item->id) }}"
                                                class="btn btn-inverse-warning" title="Download"> <i
                                                     data-feather="download"></i> </a>
 
