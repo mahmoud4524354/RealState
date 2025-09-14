@@ -339,6 +339,8 @@
                                         <img src="{{ asset($property->property_thambnail) }}"
                                              style="width:100px; height:100px;">
                                     </div>
+                                    <x-input-error :messages="$errors->get('property_thambnail')" class="mt-2 text-danger" />
+
                                 </div><!-- Col -->
 
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -428,12 +430,13 @@
                                     <tr>
                                         <td>
                                             <input type="file" class="form-control" name="multi_img">
+                                            <x-input-error :messages="$errors->get('multi_img')" class="mt-2 text-danger" />
                                         </td>
-
                                         <td>
                                             <input type="submit" class="btn btn-info px-4" value="Add Image">
                                         </td>
                                     </tr>
+
                                     </tbody>
                                 </table>
 
