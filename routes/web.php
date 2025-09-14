@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -190,3 +191,4 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 require __DIR__ . '/auth.php';
 
 
+Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']);

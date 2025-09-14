@@ -15,7 +15,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+//use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+use Intervention\Image\Facades\Image;
 
 class PropertyController extends Controller
 {
@@ -82,14 +83,23 @@ class PropertyController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
+        /// Multiple Image Upload From Here ////
 
-        MultiImage::insert([
+        $images = $request->file('multi_img');
+        foreach($images as $img){
 
-            'property_id' => $property_id,
-            'photo_name' => $thumbnailPath,
-            'created_at' => Carbon::now(),
+            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(770,520)->save('uploads/'.$make_name);
+            $uploadPath = 'uploads/'.$make_name;
 
-        ]);
+            MultiImage::insert([
+
+                'property_id' => $property_id,
+                'photo_name' => $uploadPath,
+                'created_at' => Carbon::now(),
+
+            ]);
+        }
 
 
         $facilities = Count($request->facility_name);
@@ -176,6 +186,12 @@ class PropertyController extends Controller
 
     public function UpdatePropertyThambnail(Request $request)
     {
+        $request->validate([
+            'property_thambnail' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'property_thambnail.required' => 'Please choose an image first.',
+        ]);
+
         $property = Property::findOrFail($request->id);
 
         $imagePath = $this->uploadImage($request, 'property_thambnail');
@@ -190,6 +206,12 @@ class PropertyController extends Controller
 
     public function UpdatePropertyMultiimage(Request $request)
     {
+        $request->validate([
+            'multi_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'multi_img.required' => 'Please choose an image first.',
+        ]);
+
         $imgs = $request->multi_img;
 
         foreach ((array)$imgs as $id => $img) {
@@ -229,16 +251,24 @@ class PropertyController extends Controller
 
     public function StoreNewMultiimage(Request $request)
     {
-
+        $request->validate([
+            'multi_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ], [
+            'multi_img.required' => 'Please choose an image first.',
+        ]);
         $new_multi = $request->imageid;
+        $image = $request->file('multi_img');
 
-        $uploadPath = $this->uploadImage($request, 'multi_img', 'uploads');
+        $make_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(770,520)->save('uploads/'.$make_name);
+        $uploadPath = 'uploads/'.$make_name;
 
         MultiImage::insert([
             'property_id' => $new_multi,
             'photo_name' => $uploadPath,
             'created_at' => Carbon::now(),
         ]);
+
 
         toastr()->success('Multi Image Added Successfully');
 

@@ -197,6 +197,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Yoeunes\Toastr\ToastrServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
