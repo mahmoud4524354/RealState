@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/password/update', [UserController::class, 'UserUpdatePassword'])->name('user.password.update');
 
 });
+
+
+// User WishlistAll Route
+Route::controller(WishlistController::class)->group(function(){
+
+    Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
+    Route::get('/get-wishlist-property', 'GetWishlistProperty');
+    Route::get('/wishlist-remove/{id}', 'WishlistRemove');
+
+
+});
+
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -191,4 +204,8 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 require __DIR__ . '/auth.php';
 
 
+// Frontend Property Details All Route
 Route::get('/property/details/{id}/{slug}', [IndexController::class, 'PropertyDetails']);
+
+// Wishlist Add Route
+Route::post('/add-to-wishList/{property_id}', [WishlistController::class, 'AddToWishList']);
