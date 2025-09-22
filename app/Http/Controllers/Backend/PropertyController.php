@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\MultiImage;
 use App\Models\PackagePlan;
 use App\Models\Property;
+use App\Models\PropertyMessage;
 use App\Models\PropertyType;
 use App\Models\User;
 use App\Traits\FileUploadTrait;
@@ -16,6 +17,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 //use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class PropertyController extends Controller
@@ -393,4 +395,22 @@ class PropertyController extends Controller
         return $pdf->download('invoice.pdf');
 
     }
+
+    public function AdminPropertyMessage(){
+
+        $usermsg = PropertyMessage::latest()->get();
+        return view('backend.message.all_message',compact('usermsg'));
+
+    }
+
+    public function AdminMessageDetails($id){
+
+        $uid = Auth::user()->id;
+        $usermsg = PropertyMessage::where('user_id',$uid)->get();
+
+        $msgdetails = PropertyMessage::findOrFail($id);
+        return view('backend.message.message_details',compact('usermsg','msgdetails'));
+
+    }
+
 }

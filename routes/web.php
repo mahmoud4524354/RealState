@@ -129,7 +129,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/package/history', 'AdminPackageHistory')->name('admin.package.history');
         Route::get('/package/invoice/{id}', 'PackageInvoice')->name('package.invoice');
 
-
+        Route::get('/admin/property/message/', 'AdminPropertyMessage')->name('admin.property.message');
+        Route::get('/admin/message/details/{id}', 'AdminMessageDetails')->name('admin.message.details');
     });
 
 
@@ -191,6 +192,9 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
         Route::get('/agent/delete/property/{id}', 'AgentDeleteProperty')->name('agent.delete.property');
 
+        Route::get('/agent/property/message/', 'AgentPropertyMessage')->name('agent.property.message');
+        Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');
+
     });
 
     Route::controller(AgentBuyPackageController::class)->group(function(){
@@ -203,7 +207,6 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
         Route::get('/package/history', 'PackageHistory')->name('package.history');
         Route::get('/agent/package/invoice/{id}', 'AgentPackageInvoice')->name('agent.package.invoice');
-
 
     });
 
