@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\PropertyMessage;
+use App\Models\PropertyType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -72,6 +73,10 @@ class IndexController extends Controller
         $agent = User::findOrFail($id);
         $property = Property::where('agent_id', $id)->get();
         $featured = Property::where('featured', '1')->limit(3)->get();
+
+        $rentproperty = Property::where('property_status','rent')->get();
+        $buyproperty = Property::where('property_status','buy')->get();
+
         return view('frontend.agent.agent_details', get_defined_vars());
     }
 
@@ -96,5 +101,34 @@ class IndexController extends Controller
         toastr()->warning('Please Login First');
         return redirect()->back();
     }
+
+    public function RentProperty(){
+
+        $property = Property::where('status','1')->where('property_status','rent')->get();
+
+        return view('frontend.property.rent_property',compact('property'));
+
+    }
+
+
+    public function BuyProperty(){
+
+        $property = Property::where('status','1')->where('property_status','buy')->get();
+
+        return view('frontend.property.buy_property',compact('property'));
+
+    }
+
+
+    public function PropertyType($id){
+
+        $property = Property::where('status','1')->where('ptype_id',$id)->get();
+
+        $pbread = PropertyType::where('id',$id)->first();
+
+        return view('frontend.property.property_type',compact('property','pbread'));
+
+    }
+
 
 }
