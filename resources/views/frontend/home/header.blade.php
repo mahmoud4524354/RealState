@@ -5,7 +5,7 @@
             <div class="left-column pull-left">
                 <ul class="info clearfix">
                     <li><i class="far fa-map-marker-alt"></i>Discover St, New York, NY 10012, USA</li>
-                    <li><i class="far fa-clock"></i>Mon - Sat  9.00 - 18.00</li>
+                    <li><i class="far fa-clock"></i>Mon - Sat 9.00 - 18.00</li>
                     <li><i class="far fa-phone"></i><a href="tel:2512353256">+251-235-3256</a></li>
                 </ul>
             </div>
@@ -22,7 +22,12 @@
 
                     <div class="sign-box">
                         <a href="{{ route('dashboard') }}"><i class="fas fa-user"></i>Dashboard</a>
-                        <a href="{{ route('logout') }}"><i class="fas fa-user"></i>Logout</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">
+                                <i class="fas fa-user"></i> Logout
+                            </button>
+                        </form>
                     </div>
 
                 @else
@@ -34,7 +39,6 @@
                 @endauth
 
 
-
             </div>
         </div>
     </div>
@@ -43,7 +47,8 @@
         <div class="outer-box">
             <div class="main-box">
                 <div class="logo-box">
-                    <figure class="logo"><a href="{{ url('/') }}"><img src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></figure>
+                    <figure class="logo"><a href="{{ url('/') }}"><img
+                                src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></figure>
                 </div>
                 <div class="menu-area clearfix">
                     <!--Mobile Navigation Toggler-->
@@ -56,8 +61,8 @@
                         <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
 
-                                <li><a href="{{ url('/') }}"><span>Home</span></a> </li>
-                                <li><a href="{{ url('/') }}"><span>About Us </span></a> </li>
+                                <li><a href="{{ url('/') }}"><span>Home</span></a></li>
+                                <li><a href="{{ url('/') }}"><span>About Us </span></a></li>
 
                                 <li class="dropdown"><a href="index.html"><span>Property</span></a>
                                     <ul>
@@ -66,9 +71,9 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="{{ url('/') }}"><span>Agent </span></a> </li>
+                                <li><a href="{{ url('/') }}"><span>Agent </span></a></li>
 
-                                <li><a href="{{ url('/') }}"><span>Blog  </span></a> </li>
+                                <li><a href="{{ url('/') }}"><span>Blog  </span></a></li>
 
 
                                 <li><a href="contact.html"><span>Contact</span></a></li>
@@ -94,7 +99,8 @@
         <div class="outer-box">
             <div class="main-box">
                 <div class="logo-box">
-                    <figure class="logo"><a href="index.html"><img src="{{ asset('frontend/assets/images/logo.png') }}" alt=""></a></figure>
+                    <figure class="logo"><a href="index.html"><img src="{{ asset('frontend/assets/images/logo.png') }}"
+                                                                   alt=""></a></figure>
                 </div>
                 <div class="menu-area clearfix">
                     <nav class="main-menu clearfix">
