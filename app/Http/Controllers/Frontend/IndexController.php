@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\PropertyMessage;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Property;
@@ -64,6 +65,36 @@ class IndexController extends Controller
             return redirect()->back();
         }
 
+    }
+
+    public function AgentDetails($id)
+    {
+        $agent = User::findOrFail($id);
+        $property = Property::where('agent_id', $id)->get();
+        $featured = Property::where('featured', '1')->limit(3)->get();
+        return view('frontend.agent.agent_details', get_defined_vars());
+    }
+
+    public function AgentDetailsMessage(Request $request)
+    {
+
+        $aid = $request->agent_id;
+
+        if (Auth::check()) {
+            PropertyMessage::insert([
+                'user_id' => Auth::user()->id,
+                'agent_id' => $aid,
+                'msg_name' => $request->msg_name,
+                'msg_email' => $request->msg_email,
+                'msg_phone' => $request->msg_phone,
+                'message' => $request->message,
+                'created_at' => Carbon::now(),
+            ]);
+            toastr()->success('Message Send Successfully');
+            return redirect()->back();
+        }
+        toastr()->warning('Please Login First');
+        return redirect()->back();
     }
 
 }

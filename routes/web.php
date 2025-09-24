@@ -210,10 +210,13 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
     });
 
+
+
 });
 
 
 require __DIR__ . '/auth.php';
+
 
 
 // Frontend Property Details All Route
@@ -227,3 +230,9 @@ Route::post('/add-to-compare/{property_id}', [CompareController::class, 'AddToCo
 
 // Send Message from Property Details Page
 Route::post('/property/message', [IndexController::class, 'PropertyMessage'])->name('property.message');
+
+// Agent Details Page in Frontend
+Route::get('/agent/details/{id}', [IndexController::class, 'AgentDetails'])->name('agent.details');
+
+// Send Message from Agent Details Page
+Route::post('/agent/details/message', [IndexController::class, 'AgentDetailsMessage'])->name('agent.details.message');
