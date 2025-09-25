@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -245,3 +246,16 @@ Route::get('/buy/property', [IndexController::class, 'BuyProperty'])->name('buy.
 
 // Get All Property Type Data
 Route::get('/property/type/{id}', [IndexController::class, 'PropertyType'])->name('property.type');
+
+
+// State  All Route
+Route::controller(StateController::class)->group(function(){
+
+    Route::get('/all/state', 'AllState')->name('all.state');
+    Route::get('/add/state', 'AddState')->name('add.state');
+    Route::post('/store/state', 'StoreState')->name('store.state');
+    Route::get('/edit/state/{id}', 'EditState')->name('edit.state');
+    Route::post('/update/state', 'UpdateState')->name('update.state');
+    Route::get('/delete/state/{id}', 'DeleteState')->name('delete.state');
+
+});
