@@ -10,6 +10,7 @@ use App\Models\PackagePlan;
 use App\Models\Property;
 use App\Models\PropertyMessage;
 use App\Models\PropertyType;
+use App\Models\State;
 use App\Models\User;
 use App\Traits\FileUploadTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -35,6 +36,7 @@ class PropertyController extends Controller
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
+        $pstate = State::latest()->get();
 
         return view('backend.property.add_property', get_defined_vars());
     }
@@ -126,6 +128,7 @@ class PropertyController extends Controller
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('role', 'agent')->where('status', 'active')->latest()->get();
+        $pstate = State::latest()->get();
 
         $facilities = Facility::where('property_id', $id)->get();
         $property = Property::findOrFail($id);

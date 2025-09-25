@@ -125,8 +125,13 @@
                                     <div class="col-sm-3">
                                         <div class="mb-3">
                                             <label class="form-label">State</label>
-                                            <input type="text" name="state" class="form-control"
-                                                   value="{{ $property->state }}">
+                                            <select name="state" class="form-select" id="exampleFormControlSelect1">
+                                                <option selected="" disabled="">Select State</option>
+                                                @foreach($pstate as $state)
+                                                    <option
+                                                        value="{{ $state->id }}" {{ $state->id == $property->state ? 'selected' : '' }}>{{ $state->state_name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div><!-- Col -->
 
@@ -339,7 +344,8 @@
                                         <img src="{{ asset($property->property_thambnail) }}"
                                              style="width:100px; height:100px;">
                                     </div>
-                                    <x-input-error :messages="$errors->get('property_thambnail')" class="mt-2 text-danger" />
+                                    <x-input-error :messages="$errors->get('property_thambnail')"
+                                                   class="mt-2 text-danger"/>
 
                                 </div><!-- Col -->
 
@@ -430,7 +436,8 @@
                                     <tr>
                                         <td>
                                             <input type="file" class="form-control" name="multi_img">
-                                            <x-input-error :messages="$errors->get('multi_img')" class="mt-2 text-danger" />
+                                            <x-input-error :messages="$errors->get('multi_img')"
+                                                           class="mt-2 text-danger"/>
                                         </td>
                                         <td>
                                             <input type="submit" class="btn btn-info px-4" value="Add Image">
