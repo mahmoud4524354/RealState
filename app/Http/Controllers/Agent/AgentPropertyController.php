@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\PropertyMessage;
+use App\Models\State;
 use App\Models\User;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ class AgentPropertyController extends Controller
 
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
+        $pstate = State::latest()->get();
 
         $id = Auth::user()->id;
         $property = User::where('role','agent')->where('id',$id)->first();
@@ -46,7 +48,7 @@ class AgentPropertyController extends Controller
             return redirect()->route('buy.package');
         }else{
 
-            return view('agent.property.add_property',compact('propertytype','amenities'));
+            return view('agent.property.add_property',compact('propertytype','amenities','pstate'));
         }
 
     }
@@ -159,6 +161,7 @@ class AgentPropertyController extends Controller
 
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
+        $pstate = State::latest()->get();
 
         return view('agent.property.edit_property', compact('property', 'propertytype', 'amenities', 'property_ami', 'multiImage', 'facilities'));
 
