@@ -264,3 +264,10 @@ Route::controller(StateController::class)->group(function(){
     Route::get('/delete/state/{id}', 'DeleteState')->name('delete.state');
 
 });
+
+
+// Home Page Buy Search Option
+Route::post('/buy/property/search', [IndexController::class, 'BuyPropertySearch'])->name('buy.property.search');
+
+// Home Page Rent Search Option
+Route::post('/rent/property/search', [IndexController::class, 'RentPropertySearch'])->name('rent.property.search');
