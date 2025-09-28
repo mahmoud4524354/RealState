@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\PropertyMessage;
 use App\Models\PropertyType;
+use App\Models\State;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -130,5 +131,13 @@ class IndexController extends Controller
 
     }
 
+    public function StateDetails($id){
+
+        $property = Property::where('status','1')->where('state',$id)->get();
+
+        $bstate = State::where('id',$id)->first();
+        return view('frontend.property.state_property',compact('property','bstate'));
+
+    }
 
 }
