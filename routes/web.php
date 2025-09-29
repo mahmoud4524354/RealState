@@ -5,6 +5,7 @@ use App\Http\Controllers\Agent\AgentBuyPackageController;
 use App\Http\Controllers\Agent\AgentPropertyController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\StateController;
@@ -145,6 +146,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/testimonials/{id}', 'EditTestimonials')->name('edit.testimonials');
         Route::post('/update/testimonials', 'UpdateTestimonials')->name('update.testimonials');
         Route::get('/delete/testimonials/{id}', 'DeleteTestimonials')->name('delete.testimonials');
+
+    });
+
+    Route::controller(BlogController::class)->group(function(){
+
+        Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category');
+        Route::post('/store/type', 'StoreBlogCategory')->name('store.blog.category');
+        Route::get('/blog/category/{id}', 'EditBlogCategory')->name('edit.blog.category');
+        Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+
+        Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
 
     });
 
