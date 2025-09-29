@@ -186,7 +186,7 @@
                                         @endphp
 
 
-                                        <li><a href="blog-details.html">{{ $category->category_name }}<span>({{ count($post) }})</span></a>
+                                        <li><a href="{{url('blog/category/list/'.$category->id)}}">{{ $category->category_name }}<span>({{ count($post) }})</span></a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="post-inner">
 
-                                @foreach($recent_post as $post)
+                                @foreach($recent_posts as $post)
                                     <div class="post">
                                         <figure class="post-thumb"><a href="blog-details.html"><img
                                                     src="{{ asset($post->post_image) }}" alt=""></a></figure>

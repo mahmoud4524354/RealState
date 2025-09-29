@@ -163,9 +163,21 @@ class BlogController extends Controller
         $all_tags = explode(',',$tags);
 
         $categories = BlogCategory::latest()->get();
-        $recent_post = BlogPost::latest()->limit(3)->get();
+        $recent_posts = BlogPost::latest()->limit(3)->get();
 
         return view('frontend.blog.blog_details',get_defined_vars());
+
+    }
+
+
+    public function BlogCatList($id){
+
+        $blog = BlogPost::where('blogcat_id',$id)->get();
+        $breadcat = BlogCategory::where('id',$id)->first();
+        $categories = BlogCategory::latest()->get();
+        $recent_posts = BlogPost::latest()->limit(3)->get();
+
+        return view('frontend.blog.blog_category_list', get_defined_vars());
 
     }
 
