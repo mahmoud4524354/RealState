@@ -137,7 +137,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
-    // Testimonials  All Route
+    // Testimonials  All Routes
     Route::controller(TestimonialController::class)->group(function(){
 
         Route::get('/all/testimonials', 'AllTestimonials')->name('all.testimonials');
@@ -149,14 +149,24 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     });
 
+
+    // BlogController Routes
     Route::controller(BlogController::class)->group(function(){
 
+        // Category_blog All Routes
         Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category');
         Route::post('/store/type', 'StoreBlogCategory')->name('store.blog.category');
         Route::get('/blog/category/{id}', 'EditBlogCategory')->name('edit.blog.category');
         Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
-
         Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
+
+        // Posts All Routes
+        Route::get('/all/post', 'AllPost')->name('all.post');
+        Route::get('/add/post', 'AddPost')->name('add.post');
+        Route::post('/store/post', 'StorePost')->name('store.post');
+        Route::get('/edit/post/{id}', 'EditPost')->name('edit.post');
+        Route::post('/update/post', 'UpdatePost')->name('update.post');
+        Route::get('/delete/post/{id}', 'DeletePost')->name('delete.post');
 
     });
 
