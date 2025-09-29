@@ -210,7 +210,7 @@ class IndexController extends Controller
             ->whereHas('pstate', function($q) use ($sstate){
                 $q->where('state_name','like' , '%' .$sstate. '%');
             })
-            
+
             ->whereHas('type', function($q) use ($stype){
                 $q->where('type_name','like' , '%' .$stype. '%');
             })

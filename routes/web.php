@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\StateController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -135,6 +136,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
+    // Testimonials  All Route
+    Route::controller(TestimonialController::class)->group(function(){
+
+        Route::get('/all/testimonials', 'AllTestimonials')->name('all.testimonials');
+        Route::get('/add/testimonials', 'AddTestimonials')->name('add.testimonials');
+        Route::post('/store/testimonials', 'StoreTestimonials')->name('store.testimonials');
+        Route::get('/edit/testimonials/{id}', 'EditTestimonials')->name('edit.testimonials');
+        Route::post('/update/testimonials', 'UpdateTestimonials')->name('update.testimonials');
+        Route::get('/delete/testimonials/{id}', 'DeleteTestimonials')->name('delete.testimonials');
+
+    });
 
 });
 
@@ -274,3 +286,5 @@ Route::post('/rent/property/search', [IndexController::class, 'RentPropertySearc
 
 // All Property Seach Option
 Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'])->name('all.property.search');
+
+
