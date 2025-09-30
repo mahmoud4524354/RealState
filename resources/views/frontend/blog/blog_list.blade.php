@@ -11,10 +11,10 @@
         </div>
         <div class="auto-container">
             <div class="content-box clearfix">
-                <h1> {{ $breadcat->category_name }}  </h1>
+                <h1> Blog </h1>
                 <ul class="bread-crumb clearfix">
                     <li><a href="index.html">Home</a></li>
-                    <li>{{ $breadcat->category_name }} </li>
+                    <li>Blog</li>
                 </ul>
             </div>
         </div>
@@ -177,5 +177,4 @@
             </div>
         </div>
     </section>
-
 @endsection

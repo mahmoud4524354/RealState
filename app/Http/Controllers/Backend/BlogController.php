@@ -181,6 +181,16 @@ class BlogController extends Controller
 
     }
 
+    public function  BlogList()
+    {
+        $blog = BlogPost::latest()->get();
+        $categories = BlogCategory::latest()->get();
+        $recent_posts = BlogPost::latest()->limit(3)->get();
+
+        return view('frontend.blog.blog_list',get_defined_vars());
+
+    }
+
 
 }
 
