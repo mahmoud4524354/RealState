@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogPost;
+use App\Models\Comment;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
 use App\Models\BlogCategory;
@@ -188,6 +189,24 @@ class BlogController extends Controller
         $recent_posts = BlogPost::latest()->limit(3)->get();
 
         return view('frontend.blog.blog_list',get_defined_vars());
+
+    }
+
+    public function StoreComment(Request $request){
+
+        $post_id = $request->post_id;
+
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'post_id' => $post_id,
+            'parent_id' => null,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        toastr()->success('Comment Added Successfully');
+
+        return redirect()->back();
 
     }
 

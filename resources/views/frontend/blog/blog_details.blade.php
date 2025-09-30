@@ -123,7 +123,10 @@
                             </div>
 
                             @auth
-                                <form action="blog-details.html" method="post" class="comment-form default-form">
+                                <form action="{{ route('store.comment') }}" method="post"
+                                      class="comment-form default-form">
+                                    @csrf
+
                                     <div class="row">
 
                                         <div class="col-lg-12 col-md-12 col-sm-12 form-group">

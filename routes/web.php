@@ -313,6 +313,7 @@ Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'
 Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
 Route::get('/blog/category/list/{id}', [BlogController::class, 'BlogCatList']);
 Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog.list');
+Route::post('/store/comment', [BlogController::class, 'StoreComment'])->name('store.comment');
 
 
 
