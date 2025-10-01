@@ -319,5 +319,8 @@ Route::get('/admin/comment/reply/{id}', [BlogController::class, 'AdminCommentRep
 Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('reply.message');
 
 
+// Schedule Message Request Route
+Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name('store.schedule');
+
 
 

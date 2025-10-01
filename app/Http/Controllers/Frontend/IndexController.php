@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\PropertyMessage;
 use App\Models\PropertyType;
+use App\Models\Schedule;
 use App\Models\State;
 use App\Models\User;
 use Carbon\Carbon;
@@ -155,11 +156,9 @@ class IndexController extends Controller
 
         $property = Property::where('property_name', 'like', '%' . $item . '%')
             ->where('property_status', 'buy')->with('type', 'pstate')
-
             ->whereHas('pstate', function ($q) use ($sstate) {
                 $q->where('state_name', 'like', '%' . $sstate . '%');
             })
-
             ->whereHas('type', function ($q) use ($stype) {
                 $q->where('type_name', 'like', '%' . $stype . '%');
             })
@@ -181,11 +180,9 @@ class IndexController extends Controller
 
         $property = Property::where('property_name', 'like', '%' . $item . '%')
             ->where('property_status', 'rent')->with('type', 'pstate')
-
             ->whereHas('pstate', function ($q) use ($sstate) {
                 $q->where('state_name', 'like', '%' . $sstate . '%');
             })
-
             ->whereHas('type', function ($q) use ($stype) {
                 $q->where('type_name', 'like', '%' . $stype . '%');
             })
@@ -195,7 +192,8 @@ class IndexController extends Controller
 
     }
 
-    public function AllPropertySearch(Request $request){
+    public function AllPropertySearch(Request $request)
+    {
 
         $property_status = $request->property_status;
         $stype = $request->ptype_id;
@@ -203,20 +201,48 @@ class IndexController extends Controller
         $bedrooms = $request->bedrooms;
         $bathrooms = $request->bathrooms;
 
-        $property = Property::where('status','1')->where('bedrooms',$bedrooms)->
-        where('bathrooms', 'like' , '%' .$bathrooms. '%')->
-        where('property_status',$property_status)->with('type','pstate')
-
-            ->whereHas('pstate', function($q) use ($sstate){
-                $q->where('state_name','like' , '%' .$sstate. '%');
+        $property = Property::where('status', '1')->where('bedrooms', $bedrooms)->
+        where('bathrooms', 'like', '%' . $bathrooms . '%')->
+        where('property_status', $property_status)->with('type', 'pstate')
+            ->whereHas('pstate', function ($q) use ($sstate) {
+                $q->where('state_name', 'like', '%' . $sstate . '%');
             })
-
-            ->whereHas('type', function($q) use ($stype){
-                $q->where('type_name','like' , '%' .$stype. '%');
+            ->whereHas('type', function ($q) use ($stype) {
+                $q->where('type_name', 'like', '%' . $stype . '%');
             })
             ->get();
 
-        return view('frontend.property.property_search',compact('property'));
+        return view('frontend.property.property_search', compact('property'));
 
+    }
+
+
+    public function StoreSchedule(Request $request)
+    {
+
+        $agent_id = $request->agent_id;
+        $property_id = $request->property_id;
+
+        if (Auth::check()) {
+
+            Schedule::create([
+
+                'user_id' => Auth::user()->id,
+                'property_id' => $property_id,
+                'agent_id' => $agent_id,
+                'tour_date' => $request->tour_date,
+                'tour_time' => $request->tour_time,
+                'message' => $request->message,
+            ]);
+
+            toastr()->success('Message Send Successfully');
+            return redirect()->back();
+
+        } else {
+
+            toastr()->warning('Please Login First');
+            return redirect()->back();
+
+        }
     }
 }
