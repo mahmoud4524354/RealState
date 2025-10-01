@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
 
 // User WishlistAll Route
-Route::controller(WishlistController::class)->group(function(){
+Route::controller(WishlistController::class)->group(function () {
 
     Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
     Route::get('/get-wishlist-property', 'GetWishlistProperty');
@@ -60,7 +60,7 @@ Route::controller(WishlistController::class)->group(function(){
 });
 
 // User Compare All Route
-Route::controller(CompareController::class)->group(function(){
+Route::controller(CompareController::class)->group(function () {
 
     Route::get('/user/compare', 'UserCompare')->name('user.compare');
     Route::get('/get-compare-property', 'GetCompareProperty');
@@ -138,7 +138,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     // Testimonials  All Routes
-    Route::controller(TestimonialController::class)->group(function(){
+    Route::controller(TestimonialController::class)->group(function () {
 
         Route::get('/all/testimonials', 'AllTestimonials')->name('all.testimonials');
         Route::get('/add/testimonials', 'AddTestimonials')->name('add.testimonials');
@@ -151,7 +151,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     // BlogController Routes
-    Route::controller(BlogController::class)->group(function(){
+    Route::controller(BlogController::class)->group(function () {
 
         // Category_blog All Routes
         Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category');
@@ -174,7 +174,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 // Agent All Route from admin
-Route::controller(AdminController::class)->group(function(){
+Route::controller(AdminController::class)->group(function () {
 
     Route::get('/all/agent', 'allAgent')->name('all.agent');
     Route::get('/add/agent', 'addAgent')->name('add.agent');
@@ -202,7 +202,7 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
 
     // Agent All Property
-    Route::controller(AgentPropertyController::class)->group(function(){
+    Route::controller(AgentPropertyController::class)->group(function () {
 
         Route::get('/agent/all/property', 'AgentAllProperty')->name('agent.all.property');
         Route::get('/agent/add/property', 'AgentAddProperty')->name('agent.add.property');
@@ -232,7 +232,7 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
     });
 
-    Route::controller(AgentBuyPackageController::class)->group(function(){
+    Route::controller(AgentBuyPackageController::class)->group(function () {
 
         Route::get('/buy/package', 'BuyPackage')->name('buy.package');
         Route::get('/buy/business/plan', 'BuyBusinessPlan')->name('buy.business.plan');
@@ -246,12 +246,10 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
     });
 
 
-
 });
 
 
 require __DIR__ . '/auth.php';
-
 
 
 // Frontend Property Details All Route
@@ -288,7 +286,7 @@ Route::get('/state/details/{id}', [IndexController::class, 'StateDetails'])->nam
 Route::get('/state/details/{id}', [IndexController::class, 'StateDetails'])->name('state.details');
 
 // State  All Route
-Route::controller(StateController::class)->group(function(){
+Route::controller(StateController::class)->group(function () {
 
     Route::get('/all/state', 'AllState')->name('all.state');
     Route::get('/add/state', 'AddState')->name('add.state');
@@ -313,7 +311,13 @@ Route::post('/all/property/search', [IndexController::class, 'AllPropertySearch'
 Route::get('/blog/details/{slug}', [BlogController::class, 'BlogDetails']);
 Route::get('/blog/category/list/{id}', [BlogController::class, 'BlogCatList']);
 Route::get('/blog', [BlogController::class, 'BlogList'])->name('blog.list');
+
 Route::post('/store/comment', [BlogController::class, 'StoreComment'])->name('store.comment');
+Route::get('/admin/blog/comment', [BlogController::class, 'AdminBlogComment'])->name('admin.blog.comment');
+
+Route::get('/admin/comment/reply/{id}', [BlogController::class, 'AdminCommentReply'])->name('admin.comment.reply');
+Route::post('/reply/message', [BlogController::class, 'ReplyMessage'])->name('reply.message');
+
 
 
 

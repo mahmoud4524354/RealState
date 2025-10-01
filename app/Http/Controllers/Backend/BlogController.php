@@ -157,24 +157,26 @@ class BlogController extends Controller
     }
 
 
-    public function BlogDetails($slug){
+    public function BlogDetails($slug)
+    {
 
-        $blog = BlogPost::where('post_slug',$slug)->first();
+        $blog = BlogPost::where('post_slug', $slug)->first();
         $tags = $blog->post_tags;
-        $all_tags = explode(',',$tags);
+        $all_tags = explode(',', $tags);
 
         $categories = BlogCategory::latest()->get();
         $recent_posts = BlogPost::latest()->limit(3)->get();
 
-        return view('frontend.blog.blog_details',get_defined_vars());
+        return view('frontend.blog.blog_details', get_defined_vars());
 
     }
 
 
-    public function BlogCatList($id){
+    public function BlogCatList($id)
+    {
 
-        $blog = BlogPost::where('blogcat_id',$id)->get();
-        $breadcat = BlogCategory::where('id',$id)->first();
+        $blog = BlogPost::where('blogcat_id', $id)->get();
+        $breadcat = BlogCategory::where('id', $id)->first();
         $categories = BlogCategory::latest()->get();
         $recent_posts = BlogPost::latest()->limit(3)->get();
 
@@ -182,17 +184,18 @@ class BlogController extends Controller
 
     }
 
-    public function  BlogList()
+    public function BlogList()
     {
         $blog = BlogPost::latest()->get();
         $categories = BlogCategory::latest()->get();
         $recent_posts = BlogPost::latest()->limit(3)->get();
 
-        return view('frontend.blog.blog_list',get_defined_vars());
+        return view('frontend.blog.blog_list', get_defined_vars());
 
     }
 
-    public function StoreComment(Request $request){
+    public function StoreComment(Request $request)
+    {
 
         $post_id = $request->post_id;
 
@@ -210,6 +213,40 @@ class BlogController extends Controller
 
     }
 
+    public function AdminBlogComment()
+    {
+        $comment = Comment::where('parent_id', null)->latest()->get();
+
+        return view('backend.comment.all_comments', compact('comment'));
+    }
+
+
+    public function AdminCommentReply($id){
+
+        $comment = Comment::where('id',$id)->first();
+        return view('backend.comment.reply_comment',compact('comment'));
+
+    }
+
+    public function ReplyMessage(Request $request)
+    {
+
+        $id = $request->id;
+        $user_id = $request->user_id;
+        $post_id = $request->post_id;
+
+        Comment::create([
+            'user_id' => $user_id,
+            'post_id' => $post_id,
+            'parent_id' => $id,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        toastr()->success('Comment Added Successfully');
+
+        return redirect()->back();
+    }
 
 }
 

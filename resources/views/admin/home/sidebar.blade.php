@@ -41,7 +41,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#state" role="button" aria-expanded="false" aria-controls="emails">
+                <a class="nav-link" data-bs-toggle="collapse" href="#state" role="button" aria-expanded="false"
+                   aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Property State </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -113,7 +114,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#testimonials" role="button" aria-expanded="false" aria-controls="emails">
+                <a class="nav-link" data-bs-toggle="collapse" href="#testimonials" role="button" aria-expanded="false"
+                   aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Testimonials Manage </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -156,7 +158,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#blogcategory" role="button" aria-expanded="false" aria-controls="uiComponents">
+                <a class="nav-link" data-bs-toggle="collapse" href="#blogcategory" role="button" aria-expanded="false"
+                   aria-controls="uiComponents">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Blog Category </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -174,7 +177,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#Post" role="button" aria-expanded="false" aria-controls="uiComponents">
+                <a class="nav-link" data-bs-toggle="collapse" href="#Post" role="button" aria-expanded="false"
+                   aria-controls="uiComponents">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Blog Post </span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -193,6 +197,15 @@
                     </ul>
                 </div>
             </li>
+
+
+            <li class="nav-item">
+                <a href="{{ route('admin.blog.comment') }}" class="nav-link">
+                    <i class="link-icon" data-feather="calendar"></i>
+                    <span class="link-title">Blog Comments </span>
+                </a>
+            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false"
