@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Agent\AgentBuyPackageController;
 use App\Http\Controllers\Agent\AgentPropertyController;
+use App\Http\Controllers\Agent\AgentScheduleController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\BlogController;
@@ -229,8 +230,19 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
 
         Route::get('/agent/property/message/', 'AgentPropertyMessage')->name('agent.property.message');
         Route::get('/agent/message/details/{id}', 'AgentMessageDetails')->name('agent.message.details');
-
     });
+
+
+    // Schedule Request Route
+    Route::controller(AgentScheduleController::class)->group(function () {
+
+        Route::get('/agent/schedule/request/', 'AgentScheduleRequest')->name('agent.schedule.request');
+
+        Route::get('/agent/details/schedule/{id}', 'AgentDetailsSchedule')->name('agent.details.schedule');
+
+        Route::post('/agent/update/schedule/', 'AgentUpdateSchedule')->name('agent.update.schedule');
+    });
+
 
     Route::controller(AgentBuyPackageController::class)->group(function () {
 
