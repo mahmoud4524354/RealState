@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Frontend\CompareController;
@@ -138,6 +139,21 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
+    // Agent All Route from admin
+    Route::controller(AdminController::class)->group(function () {
+
+        Route::get('/all/agent', 'allAgent')->name('all.agent');
+        Route::get('/add/agent', 'addAgent')->name('add.agent');
+        Route::post('/store/agent', 'storeAgent')->name('store.agent');
+        Route::get('/edit/agent/{id}', 'editAgent')->name('edit.agent');
+        Route::post('/update/agent/{id}', 'updateAgent')->name('update.agent');
+        Route::get('/delete/agent/{id}', 'deleteAgent')->name('delete.agent');
+
+        Route::get('/changeStatus', 'changeStatus');
+
+    });
+
+
     // Testimonials  All Routes
     Route::controller(TestimonialController::class)->group(function () {
 
@@ -171,20 +187,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     });
 
-});
+    // SMTP Setting  All Route
+    Route::controller(SettingController::class)->group(function () {
 
-
-// Agent All Route from admin
-Route::controller(AdminController::class)->group(function () {
-
-    Route::get('/all/agent', 'allAgent')->name('all.agent');
-    Route::get('/add/agent', 'addAgent')->name('add.agent');
-    Route::post('/store/agent', 'storeAgent')->name('store.agent');
-    Route::get('/edit/agent/{id}', 'editAgent')->name('edit.agent');
-    Route::post('/update/agent/{id}', 'updateAgent')->name('update.agent');
-    Route::get('/delete/agent/{id}', 'deleteAgent')->name('delete.agent');
-
-    Route::get('/changeStatus', 'changeStatus');
+        Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
+        Route::post('update/smtp/setting', 'updateSmtpSetting')->name('update.smtp.setting');
+    });
 
 });
 
