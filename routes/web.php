@@ -31,10 +31,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', [UserController::class, 'index']);
     Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
     Route::get('agent/login', [AgentController::class, 'login'])->name('agent.login');
 });
+
+Route::get('/', [UserController::class, 'index']);
 
 
 
@@ -43,7 +44,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
+// User Group Middleware
 Route::middleware('auth')->group(function () {
     Route::get('/user/profile', [UserController::class, 'UserProfile'])->name('user.profile');
 
@@ -190,14 +191,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     });
 
-    // SMTP Setting  All Route
     Route::controller(SettingController::class)->group(function () {
 
+        // SMTP Setting All Route
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('update/smtp/setting', 'updateSmtpSetting')->name('update.smtp.setting');
+
+        // Site Setting  All Route
+        Route::get('/site/setting', 'SiteSetting')->name('site.setting');
+        Route::post('/update/site/setting/{id}', 'updateSiteSetting')->name('update.site.setting');
     });
 
+
 });
+
 
 
 // Agent Group Middleware
