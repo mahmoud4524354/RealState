@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use App\Models\User;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
@@ -76,6 +77,18 @@ class UserController extends Controller
         Auth::logout();
         toastr()->success('Password Changed Successfully. Please login again.');
         return redirect()->route('login');
+    }
+
+
+    public function UserScheduleRequest(){
+
+        $user_data = User::findOrFail(Auth::user()->id);
+
+        $schedule_request = Schedule::where('user_id', $user_data['id'])->get();
+        return view('frontend.message.schedule_request',compact('user_data','schedule_request'));
+
+
+
     }
 
 }

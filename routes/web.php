@@ -30,13 +30,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('agent/login', [AgentController::class, 'login'])->name('agent.login');
+});
 
-Route::get('/', [UserController::class, 'index']);
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 
 Route::middleware('auth')->group(function () {
@@ -48,33 +53,31 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/user/password/update', [UserController::class, 'UserUpdatePassword'])->name('user.password.update');
 
+    // User WishlistAll Route
+    Route::controller(WishlistController::class)->group(function () {
+
+        Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
+        Route::get('/get-wishlist-property', 'GetWishlistProperty');
+        Route::get('/wishlist-remove/{id}', 'WishlistRemove');
+
+
+    });
+
+    // User Compare All Route
+    Route::controller(CompareController::class)->group(function () {
+
+        Route::get('/user/compare', 'UserCompare')->name('user.compare');
+        Route::get('/get-compare-property', 'GetCompareProperty');
+        Route::get('/compare-remove/{id}', 'CompareRemove');
+
+    });
+
+
+    Route::get('/user/schedule/request', [UserController::class, 'UserScheduleRequest'])->name('user.schedule.request');
+
+
 });
 
-
-// User WishlistAll Route
-Route::controller(WishlistController::class)->group(function () {
-
-    Route::get('/user/wishlist', 'UserWishlist')->name('user.wishlist');
-    Route::get('/get-wishlist-property', 'GetWishlistProperty');
-    Route::get('/wishlist-remove/{id}', 'WishlistRemove');
-
-
-});
-
-// User Compare All Route
-Route::controller(CompareController::class)->group(function () {
-
-    Route::get('/user/compare', 'UserCompare')->name('user.compare');
-    Route::get('/get-compare-property', 'GetCompareProperty');
-    Route::get('/compare-remove/{id}', 'CompareRemove');
-
-});
-
-
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
-    Route::get('agent/login', [AgentController::class, 'login'])->name('agent.login');
-});
 
 
 // Admin Group Middleware
