@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\TestimonialController;
@@ -191,6 +192,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     });
 
+
     Route::controller(SettingController::class)->group(function () {
 
         // SMTP Setting All Route
@@ -202,6 +204,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/update/site/setting/{id}', 'updateSiteSetting')->name('update.site.setting');
     });
 
+
+    // Permission All Route
+    Route::controller(RoleController::class)->group(function(){
+
+        Route::get('/all/permission', 'AllPermission')->name('all.permission');
+        Route::get('/add/permission', 'AddPermission')->name('add.permission');
+        Route::post('/store/permission', 'StorePermission')->name('store.permission');
+        Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
+        Route::post('/update/permission/{id}', 'UpdatePermission')->name('update.permission');
+        Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
+
+    });
 
 });
 
