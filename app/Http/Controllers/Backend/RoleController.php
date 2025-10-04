@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\PermissionExport;
 use App\Http\Controllers\Controller;
+use App\Imports\PermissionImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -54,6 +57,26 @@ class RoleController extends Controller
     {
         Permission::findOrFail($id)->delete();
         toastr()->success('Permission Deleted Successfully');
+        return redirect()->route('all.permission');
+    }
+
+
+
+    public function ImportPermission(){
+        return view('backend.pages.permission.import_permission');
+    }
+
+    public function Export(){
+
+        return Excel::download(new PermissionExport, 'permission.xlsx');
+
+    }
+
+    public function Import(Request $request)
+    {
+        Excel::import(new PermissionImport, $request->file('import_file'));
+
+        toastr()->success('Permission Imported Successfully');
         return redirect()->route('all.permission');
     }
 
