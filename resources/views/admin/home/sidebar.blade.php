@@ -223,7 +223,7 @@
 
             <li class="nav-item nav-category">Role & Permission</li>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="false"
+                <a class="nav-link" data-bs-toggle="collapse" href="#advancedUI" role="button" aria-expanded="true"
                    aria-controls="advancedUI">
                     <i class="link-icon" data-feather="feather"></i>
                     <span class="link-title">Role & Permission</span>
@@ -231,11 +231,21 @@
                 </a>
                 <div class="collapse" id="advancedUI">
                     <ul class="nav sub-menu">
+
                         <li class="nav-item">
                             <a href="{{ route('all.permission') }}" class="nav-link">All Permission</a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{ route('all.roles') }}" class="nav-link">All Roles </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('add.roles.permission') }}" class="nav-link">Role in Permission </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('all.roles.permission') }}" class="nav-link">All Role in Permission </a>
                         </li>
 
                     </ul>

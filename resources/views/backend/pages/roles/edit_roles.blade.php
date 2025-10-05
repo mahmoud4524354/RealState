@@ -20,7 +20,7 @@
                             <form id="myForm" method="POST" action="{{ route('update.roles', $roles->id ) }}" class="forms-sample">
                                 @csrf
 
-                                
+
                                 <div class="form-group mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Roles Name </label>
                                     <input type="text" name="name" class="form-control" value="{{ $roles->name }}">
