@@ -204,10 +204,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/update/site/setting/{id}', 'updateSiteSetting')->name('update.site.setting');
     });
 
-
-    // Permission All Route
+    // Role Controller All Routes
     Route::controller(RoleController::class)->group(function(){
 
+        // Permission All Routes
         Route::get('/all/permission', 'AllPermission')->name('all.permission');
         Route::get('/add/permission', 'AddPermission')->name('add.permission');
         Route::post('/store/permission', 'StorePermission')->name('store.permission');
@@ -220,7 +220,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/export', 'Export')->name('export');
         Route::post('/import', 'Import')->name('import');
 
+
+        Route::get('/all/roles', 'AllRoles')->name('all.roles');
+        Route::get('/add/roles', 'AddRoles')->name('add.roles');
+        Route::post('/store/roles', 'StoreRoles')->name('store.roles');
+        Route::get('/edit/roles/{id}', 'EditRoles')->name('edit.roles');
+        Route::post('/update/roles/{id}', 'UpdateRoles')->name('update.roles');
+        Route::get('/delete/roles/{id}', 'DeleteRoles')->name('delete.roles');
+
     });
+
 
 });
 

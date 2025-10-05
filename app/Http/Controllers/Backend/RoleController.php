@@ -8,6 +8,8 @@ use App\Imports\PermissionImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 
 class RoleController extends Controller
 {
@@ -61,12 +63,13 @@ class RoleController extends Controller
     }
 
 
-
-    public function ImportPermission(){
+    public function ImportPermission()
+    {
         return view('backend.pages.permission.import_permission');
     }
 
-    public function Export(){
+    public function Export()
+    {
 
         return Excel::download(new PermissionExport, 'permission.xlsx');
 
@@ -80,5 +83,49 @@ class RoleController extends Controller
         return redirect()->route('all.permission');
     }
 
+
+    public function AllRoles()
+    {
+
+        $roles = Role::all();
+        return view('backend.pages.roles.all_roles', compact('roles'));
+
+    }
+
+    public function AddRoles()
+    {
+        return view('backend.pages.roles.add_roles');
+    }
+
+    public function StoreRoles(Request $request)
+    {
+        Role::Create([
+            'name' => $request->name,
+        ]);
+        toastr()->success('Role Added Successfully');
+        return redirect()->route('all.roles');
+    }
+
+    public function EditRoles($id)
+    {
+        $roles = Role::findOrFail($id);
+        return view('backend.pages.roles.edit_roles', compact('roles'));
+    }
+
+    public function UpdateRoles(Request $request, $id)
+    {
+        Role::findOrFail($id)->update([
+            'name' => $request->name,
+        ]);
+        toastr()->success('Role Updated Successfully');
+        return redirect()->route('all.roles');
+    }
+
+    public function DeleteRoles($id)
+    {
+        Role::findOrFail($id)->delete();
+        toastr()->success('Role Deleted Successfully');
+        return redirect()->route('all.roles');
+    }
 
 }
