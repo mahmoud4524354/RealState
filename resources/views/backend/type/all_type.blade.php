@@ -17,7 +17,8 @@
                         <h6 class="card-title mb-3">Property Type</h6>
 
                         <div class="table-responsive">
-                            <table id="dataTableExample" class="table table-striped table-hover align-middle text-center">
+                            <table id="dataTableExample"
+                                   class="table table-striped table-hover align-middle text-center">
                                 <thead class="table-dark">
                                 <tr>
                                     <th style="width: 70px;">#</th>
@@ -36,15 +37,27 @@
                                                 <i class="{{ $item->type_icon }} me-2"></i>
                                                 {{ $item->type_icon }}
                                             </td>
+
                                             <td>
-                                                <a href="{{ route('edit.type',$item->id) }}"
-                                                   class="btn btn-sm btn-warning me-2">
-                                                    <i class="feather icon-edit"></i> Edit
-                                                </a>
-                                                <a href="{{ route('delete.type',$item->id) }}"
-                                                   class="btn btn-sm btn-danger" id="delete">
-                                                    <i class="feather icon-trash-2"></i> Delete
-                                                </a>
+
+                                                @if(Auth::user()->can('edit.type'))
+
+                                                    <a href="{{ route('edit.type',$item->id) }}"
+                                                       class="btn btn-sm btn-warning me-2">
+                                                        <i class="feather icon-edit"></i> Edit
+                                                    </a>
+
+                                                @endif
+                                                @if(Auth::user()->can('delete.type'))
+
+                                                    <a href="{{ route('delete.type',$item->id) }}"
+                                                       class="btn btn-sm btn-danger" id="delete">
+                                                        <i class="feather icon-trash-2"></i> Delete
+                                                    </a>
+
+                                                @endif
+
+
                                             </td>
                                         </tr>
                                     @endforeach

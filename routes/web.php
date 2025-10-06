@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
 
 
 // Admin Group Middleware
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'roles:admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
@@ -92,8 +92,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(PropertyTypeController::class)->group(function () {
 
-        Route::get('/all/type', 'allTypes')->name('all.type');
-        Route::get('/add/type', 'addType')->name('add.type');
+        Route::get('/all/type', 'allTypes')->name('all.type')->middleware('permission:all.type');
+        Route::get('/add/type', 'addType')->name('add.type')->middleware('permission:add.type'); 
         Route::post('/store/type', 'storeType')->name('store.type');
         Route::get('/edit/type/{id}', 'editType')->name('edit.type');
         Route::post('/update/type/{id}', 'updateType')->name('update.type');
@@ -259,7 +259,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 // Agent Group Middleware
-Route::middleware(['auth', 'role:agent'])->group(function () {
+Route::middleware(['auth', 'roles:agent'])->group(function () {
     Route::get('agent/dashboard', [AgentController::class, 'index'])->name('agent.dashboard');
 
     Route::get('/agent/profile', [AgentController::class, 'agentProfile'])->name('agent.profile');
