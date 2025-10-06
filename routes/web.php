@@ -39,7 +39,6 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/', [UserController::class, 'index']);
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -79,7 +78,6 @@ Route::middleware('auth')->group(function () {
 
 
 });
-
 
 
 // Admin Group Middleware
@@ -205,7 +203,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     // Role Controller All Routes
-    Route::controller(RoleController::class)->group(function(){
+    Route::controller(RoleController::class)->group(function () {
 
         // Permission All Routes
         Route::get('/all/permission', 'AllPermission')->name('all.permission');
@@ -239,8 +237,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
-});
+    // Admin User All Route
+    Route::controller(AdminController::class)->group(function () {
 
+        Route::get('/all/admin', 'AllAdmin')->name('all.admin');
+
+        Route::get('/add/admin', 'AddAdmin')->name('add.admin');
+
+        Route::post('/store/admin', 'StoreAdmin')->name('store.admin');
+
+        Route::get('/edit/admin/{id}', 'EditAdmin')->name('edit.admin');
+
+        Route::post('/update/admin/{id}', 'UpdateAdmin')->name('update.admin');
+
+        Route::get('/delete/admin/{id}', 'DeleteAdmin')->name('delete.admin');
+
+    });
+
+
+});
 
 
 // Agent Group Middleware
