@@ -7,7 +7,7 @@
 
     <title>@yield('title') </title>
 
-{{--    @vite(['resources/js/app.js'])--}}
+    @vite(['resources/js/app.js'])
 
     <!-- Fav Icon -->
     <link rel="icon" href="{{ asset('frontend/assets/images/favicon.ico') }}" type="image/x-icon">

@@ -77,6 +77,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/schedule/request', [UserController::class, 'UserScheduleRequest'])->name('user.schedule.request');
 
+    Route::get('/live/chat', [UserController::class, 'LiveChat'])->name('live.chat');
+
+
 
 });
 
@@ -410,3 +413,6 @@ Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name(
 
 // Chat Post Request Route
 Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.msg');
+
+Route::get('/user-all', [ChatController::class, 'GetAllUsers']);
+
