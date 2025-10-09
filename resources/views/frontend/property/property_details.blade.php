@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('frontend.frontend_dashboard')
 @section('main')
 
@@ -35,7 +36,8 @@
                     <div class="author-info clearfix">
                         <div class="author-box pull-left">
                             @if($property->agent_id == Null)
-                                <figure class="author-thumb"><img src="{{ url('uploads/no_image.jpg') }}" alt=""></figure>
+                                <figure class="author-thumb"><img src="{{ url('uploads/no_image.jpg') }}" alt="">
+                                </figure>
                                 <h6>Admin</h6>
                             @else
 
@@ -214,7 +216,8 @@
                                         <div class="col-lg-6 col-md-12 col-sm-12 column">
                                             <div class="form-group">
                                                 <i class="far fa-calendar-alt"></i>
-                                                <input type="text" name="tour_date" placeholder="Tour Date" id="datepicker">
+                                                <input type="text" name="tour_date" placeholder="Tour Date"
+                                                       id="datepicker">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12 column">
@@ -277,7 +280,20 @@
                                             <li><i class="fas fa-phone"></i><a
                                                     href="tel:03030571965">{{ $property->user->phone }}</a></li>
                                         </ul>
-                                        <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
+
+                                        @auth
+
+                                            <div id="app">
+
+                                                <send-message :recevierid="{{ $property->agent_id }}" receivername="{{ $property->user->name }}" >
+
+                                                </send-message>
+                                            </div>
+
+                                        @else
+                                            <span class="text-danger">For Chat Login First </span>
+                                        @endauth
+
                                     </div>
 
                                 @endif
@@ -432,7 +448,9 @@
                                                     <figure class="author-thumb"><img
                                                             src="{{ (!empty($item->user->photo)) ? url($item->user->photo) : url('uploads/no_image.jpg') }}"
                                                             alt=""></figure>
-                                                    <h6>{{ $item->user->name }}</h6>
+                                                    <h6>
+                                                        <a href="{{ url('property/details/'.$item->id.'/'.$item->property_slug) }}">{{ $item->user->name }}</a>
+                                                    </h6>
                                                 @endif
                                             </div>
                                             <div class="buy-btn pull-right"><a

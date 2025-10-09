@@ -26,7 +26,10 @@
 
                     <div class="sign-box">
                         <a href="{{ route('dashboard') }}"><i class="fas fa-user"></i>Dashboard</a>
-                        <a href="{{ route('logout') }}"><i class="fas fa-user"></i>Logout</a>
+                        <form method="Post" action="{{route('logout')}}">
+                            @csrf
+                            <button class="btn btn-danger" type="submit">logout</button>
+                        </form>
                     </div>
 
                 @else

@@ -163,7 +163,7 @@ class AgentPropertyController extends Controller
         $amenities = Amenities::latest()->get();
         $pstate = State::latest()->get();
 
-        return view('agent.property.edit_property', compact('property', 'propertytype', 'amenities', 'property_ami', 'multiImage', 'facilities'));
+        return view('agent.property.edit_property',get_defined_vars());
 
     }// End Method
 

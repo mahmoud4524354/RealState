@@ -29,16 +29,16 @@
 
                                         @if($item->agent_id == Null)
 
-                                            <figure class="author-thumb"><img src="{{ url('upload/no_image.jpg') }}"
+                                            <figure class="author-thumb"><img src="{{ url('uploads/no_image.jpg') }}"
                                                                               alt=""></figure>
-                                            <h6>Admin </h6>
+                                            <a href="{{ url('property/details/'.$item->id.'/'.$item->property_slug) }}"><h6>    Admin </h6></a>
 
                                         @else
 
                                             <figure class="author-thumb"><img
-                                                    src="{{ (!empty($item->user->photo)) ? url($item->user->photo) : url('upload/no_image.jpg') }}"
+                                                    src="{{ (!empty($item->user->photo)) ? url($item->user->photo) : url('uploads/no_image.jpg') }}"
                                                     alt=""></figure>
-                                            <h6>{{ $item->user->name }}</h6>
+                                            <h6><a href="{{ url('property/details/'.$item->id.'/'.$item->property_slug) }}"> {{ $item->user->name }}</h6></a>
                                         @endif
 
                                     </div>
@@ -46,7 +46,7 @@
                                             href="property-details.html">For {{ $item->property_status }}</a></div>
                                 </div>
                                 <div class="title-text"><h4><a
-                                            href="property-details.html">{{ $item->property_name }}</a></h4></div>
+                                            href="{{ url('property/details/'.$item->id.'/'.$item->property_slug) }}">{{ $item->property_name }}</a></h4></div>
                                 <div class="price-box clearfix">
                                     <div class="price-info pull-left">
                                         <h6>Start From</h6>

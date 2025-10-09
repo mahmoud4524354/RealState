@@ -1,16 +1,15 @@
 @php
     $skip_state_0 = App\Models\State::skip(0)->first();
-    $property_0 = App\Models\Property::where('state',$skip_state_0->id)->get();
+    $property_0 = $skip_state_0 ? App\Models\Property::where('state', $skip_state_0->id)->get() : collect();
 
     $skip_state_1 = App\Models\State::skip(1)->first();
-    $property_1 = App\Models\Property::where('state',$skip_state_1->id)->get();
+    $property_1 = $skip_state_1 ? App\Models\Property::where('state', $skip_state_1->id)->get() : collect();
 
     $skip_state_2 = App\Models\State::skip(2)->first();
-    $property_2 = App\Models\Property::where('state',$skip_state_2->id)->get();
+    $property_2 = $skip_state_2 ? App\Models\Property::where('state', $skip_state_2->id)->get() : collect();
 
     $skip_state_3 = App\Models\State::skip(3)->first();
-    $property_3 = App\Models\Property::where('state',$skip_state_3->id)->get();
-
+    $property_3 = $skip_state_3 ? App\Models\Property::where('state', $skip_state_3->id)->get() : collect();
 @endphp
 
 

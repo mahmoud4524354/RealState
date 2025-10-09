@@ -7,6 +7,7 @@ use App\Http\Controllers\Agent\AgentScheduleController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\ChatController;
 use App\Http\Controllers\Backend\PropertyController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\RoleController;
@@ -92,8 +93,10 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
     Route::controller(PropertyTypeController::class)->group(function () {
 
-        Route::get('/all/type', 'allTypes')->name('all.type')->middleware('permission:all.type');
-        Route::get('/add/type', 'addType')->name('add.type')->middleware('permission:add.type');
+//        Route::get('/all/type', 'allTypes')->name('all.type')->middleware('permission:all.type');
+//        Route::get('/add/type', 'addType')->name('add.type')->middleware('permission:all.type');
+        Route::get('/all/type', 'allTypes')->name('all.type');
+        Route::get('/add/type', 'addType')->name('add.type');
         Route::post('/store/type', 'storeType')->name('store.type');
         Route::get('/edit/type/{id}', 'editType')->name('edit.type');
         Route::post('/update/type/{id}', 'updateType')->name('update.type');
@@ -405,3 +408,5 @@ Route::post('/store/schedule', [IndexController::class, 'StoreSchedule'])->name(
 
 
 
+// Chat Post Request Route
+Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.msg');
