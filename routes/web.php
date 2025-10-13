@@ -416,3 +416,7 @@ Route::post('/send-message', [ChatController::class, 'SendMsg'])->name('send.msg
 
 Route::get('/user-all', [ChatController::class, 'GetAllUsers']);
 
+Route::get('/user-message/{id}', [ChatController::class, 'UserMsgById']);
+
+Route::get('/agent/live/chat', [ChatController::class, 'AgentLiveChat'])->name('agent.live.chat');
+
