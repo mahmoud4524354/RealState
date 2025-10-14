@@ -32,7 +32,6 @@ cd RealState
 ### 2️⃣ Install dependencies
 ```bash
 composer install
-npm install
 ```
 ### 3️⃣ Create environment file
 ```bash
@@ -57,6 +56,8 @@ php artisan key:generate
 
 ### 6️⃣ Build frontend assets
 ```bash
+npm install
+npm install @vitejs/plugin-vue
 npm run dev
 ```
 ### 7️⃣ Start local development server
