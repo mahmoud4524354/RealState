@@ -7,13 +7,16 @@ This project allows users to **browse properties**, **view details**, and **chat
 
 ## 🚀 Features
 
-- 🔐 **User Authentication** (Register / Login)
-- 🏘️ **Property Listing & Detailed View**
-- 💬 **Live Chat** between users and agents
-- 📁 **File & Image Upload System**
-- 📧 **Email Notifications** for new messages or applications
-- 🖥️ **Responsive UI** using Blade templates and Bootstrap 5
-- ⚡ **Fast & Optimized** with Laravel Vite
+- 🏗️ **Full Real Estate System** with **Laravel 10**
+- 👥 **Multi-Auth** (Admin / Agent / User)
+- 🔐 **Roles & Permissions**
+- 🏘️ **Property Management & Advanced Search**
+- 💬 **Live Chat & Messaging**
+- 💌 **Email Notifications (Dynamic Config)**
+- 🧾 **PDF Invoice Generation**
+- 📁 **Multi Image Uploads**
+- 💼 **Wishlist & Compare**
+- ⚙️ **Site Settings & Custom Pagination**
 
 ---
 
