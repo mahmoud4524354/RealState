@@ -1,22 +1,22 @@
-# 🏠 RealState — Laravel Project
+#  RealState — Laravel Project
 
 A complete **real estate web application** built with **Laravel** and **Vite**.  
 This project allows users to **browse properties**, **view details**, and **chat live** with agents.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🏗️ **Full Real Estate System** with **Laravel 10**
-- 👥 **Multi-Auth** (Admin / Agent / User)
-- 🔐 **Roles & Permissions**
-- 🏘️ **Property Management & Advanced Search**
-- 💬 **Live Chat & Messaging**
-- 💌 **Email Notifications (Dynamic Config)**
-- 🧾 **PDF Invoice Generation**
-- 📁 **Multi Image Uploads**
-- 💼 **Wishlist & Compare**
-- ⚙️ **Site Settings & Custom Pagination**
+-  **Full Real Estate System** with **Laravel 10**
+-  **Multi-Auth** (Admin / Agent / User)
+-  **Roles & Permissions**
+-  **Property Management & Advanced Search**
+-  **Live Chat & Messaging**
+-  **Email Notifications (Dynamic Config)**
+-  **PDF Invoice Generation**
+-  **Multi Image Uploads**
+-  **Wishlist & Compare**
+-  **Site Settings & Custom Pagination**
 
 ---
 
